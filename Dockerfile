@@ -18,6 +18,5 @@ COPY . .
 
 # Ekspose port yang digunakan oleh aplikasi Flask
 EXPOSE 8080
-
 # Setel command default untuk menjalankan aplikasi
 CMD ["python", "app.py"]

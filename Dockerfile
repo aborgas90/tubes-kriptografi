@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Ekspose port yang digunakan oleh aplikasi Flask
-EXPOSE 5000
+EXPOSE 8080
 
 # Setel command default untuk menjalankan aplikasi
 CMD ["python", "app.py"]

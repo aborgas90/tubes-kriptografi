@@ -1,23 +1,15 @@
-# Gunakan image dasar Python
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-# Setel variabel lingkungan untuk memastikan Python tidak membuat file cache .pyc
 ENV PYTHONUNBUFFERED True
 
-# Tentukan direktori kerja di dalam container
-WORKDIR /app
+ENV APP_HOME /app
 
-# Salin file requirements.txt ke direktori kerja
-COPY requirements.txt .
+ENV PORT 5000
 
-# Instal dependensi Python
-RUN pip install -r requirements.txt
+WORKDIR $APP_HOME
 
-# Salin semua kode ke direktori kerja
-COPY . .
+COPY . ./
 
-# Ekspose port yang digunakan oleh aplikasi Flask
-EXPOSE 8080
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Setel command default untuk menjalankan aplikasi
-CMD ["python", "app.py"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app

@@ -15,10 +15,10 @@ COPY . ./
 RUN pip install -r requirements.txt
 
 # Salin semua kode ke direktori kerja
-# COPY . .
+COPY . .
 
 # Ekspose port yang digunakan oleh aplikasi Flask
-# EXPOSE 80
-
+# Ekspose port yang digunakan oleh aplikasi Flask
+EXPOSE 80
 # Setel command default untuk menjalankan aplikasi
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
+CMD ["gunicorn"  , "-b", "0.0.0.0:8080", "app.py"]

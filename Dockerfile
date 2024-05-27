@@ -2,14 +2,14 @@ FROM python:3.10-slim
 
 ENV PYTHONUNBUFFERED True
 
-ENV APP_HOME /app
+# Set WORKDIR ke dalam direktori /app
+WORKDIR /app
 
-ENV PORT 5000
+# Salin seluruh konten dari direktori proyek ke dalam WORKDIR
+COPY . .
 
-WORKDIR $APP_HOME
-
-COPY . ./
-
+# Install dependensi Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
+# Atur perintah default untuk menjalankan aplikasi
+CMD ["gunicorn", "--bind", ":5000", "--workers", "1", "--threads", "8", "--timeout", "0", "main:app"]

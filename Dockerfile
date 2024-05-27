@@ -5,18 +5,20 @@ FROM python:3.9-slim
 ENV PYTHONUNBUFFERED True
 
 # Tentukan direktori kerja di dalam container
-WORKDIR /app
+ENV APP_HOME /app
+WORKDIR $APP_HOME
 
 # Salin file requirements.txt ke direktori kerja
-COPY requirements.txt .
-
+# COPY requirements.txt .
+COPY . ./
 # Instal dependensi Python
 RUN pip install -r requirements.txt
 
 # Salin semua kode ke direktori kerja
-COPY . .
+# COPY . .
 
 # Ekspose port yang digunakan oleh aplikasi Flask
-EXPOSE 80
+# EXPOSE 80
+
 # Setel command default untuk menjalankan aplikasi
-CMD ["gunicorn"  , "-b", "0.0.0.0:8080", "app.py"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app

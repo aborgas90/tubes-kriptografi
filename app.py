@@ -4,9 +4,12 @@ import mycode  # Pastikan file mycode.py ada di direktori yang sama
 
 app = Flask(__name__)
 
+@app.errorhandler(500)
+def internal_server_error(e):
+    print('yes')    
+    return 'It works! Tapi Error', 500
+
 # Error 404 handler
-
-
 @app.errorhandler(404)
 def resource_not_found(e):
     return jsonify(error=str(e)), 404

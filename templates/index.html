@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flask Encryption App</title>
+</head>
+<body>
+    <h1>Encryption and Decryption using ROT13</h1>
+    <form method="POST">
+        <label for="text">Enter the text:</label>
+        <input type="text" id="text" name="text">
+        <button type="submit">Submit</button>
+    </form>
+    {% if encrypt_text and decrypt_text %}
+        <h2>Results:</h2>
+        <p><strong>Encrypted text:</strong> {{ encrypt_text }}</p>
+        <p><strong>Decrypted text:</strong> {{ decrypt_text }}</p>
+    {% endif %}
+</body>
+</html>

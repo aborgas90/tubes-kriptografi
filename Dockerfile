@@ -17,6 +17,6 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Ekspose port yang digunakan oleh aplikasi Flask
-EXPOSE 3000
+EXPOSE 80
 # Setel command default untuk menjalankan aplikasi
-CMD ["gunicorn"  , "-b", "0.0.0.0:8888", "app:app"]
+CMD ["gunicorn"  , "-b", "0.0.0.0:8080", "app.py"]

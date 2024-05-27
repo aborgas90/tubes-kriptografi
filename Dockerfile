@@ -1,15 +1,5 @@
-FROM python:3.10-slim
-
-ENV PYTHONUNBUFFERED True
-
-# Set WORKDIR ke dalam direktori /app
-WORKDIR /app
-
-# Salin seluruh konten dari direktori proyek ke dalam WORKDIR
-COPY . .
-
-# Install dependensi Python
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Atur perintah default untuk menjalankan aplikasi
-CMD ["gunicorn", "--bind", ":5000", "--workers", "1", "--threads", "8", "--timeout", "0", "main:app"]
+FROM python:alpine3.7
+COPY requirements.txt /
+RUN pip3 install -r /requirements.txt
+COPY app.py .
+CMD ["gunicorn"  , "-b", "0.0.0.0:8888", "app:app"]

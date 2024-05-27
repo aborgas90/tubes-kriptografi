@@ -1,15 +1,23 @@
-FROM python:3.8-alpine
+# Gunakan image dasar Python
+FROM python:3.9-slim
 
+# Setel variabel lingkungan untuk memastikan Python tidak membuat file cache .pyc
 ENV PYTHONUNBUFFERED True
 
-# Set WORKDIR ke dalam direktori /app
+# Tentukan direktori kerja di dalam container
 WORKDIR /app
 
-# Salin seluruh konten dari direktori proyek ke dalam WORKDIR
-COPY . .
+# Salin file requirements.txt ke direktori kerja
+COPY requirements.txt .
 
-# Install dependensi Python
+# Instal dependensi Python
 RUN pip install -r requirements.txt
 
-# Atur perintah default untuk menjalankan aplikasi
-CMD ["gunicorn", "--bind", ":5000", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
+# Salin semua kode ke direktori kerja
+COPY . .
+
+# Ekspose port yang digunakan oleh aplikasi Flask
+EXPOSE 8080
+
+# Setel command default untuk menjalankan aplikasi
+CMD ["python", "app.py"]

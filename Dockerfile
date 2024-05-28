@@ -16,7 +16,6 @@ RUN pip install -r requirements.txt
 
 # Salin semua kode ke direktori kerja
 COPY . .
-
 # Ekspose port yang digunakan oleh aplikasi Flask
 # Ekspose port yang digunakan oleh aplikasi Flask
 EXPOSE 80

@@ -1,3 +1,4 @@
 Flask
 gunicorn
 pycryptodome
+flask_cors

@@ -1,4 +1,4 @@
 Flask
 gunicorn
-vercel-python
-
+pycryptodome
+flask_cors
